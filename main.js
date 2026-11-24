@@ -246,6 +246,11 @@ function configureSession(ses) {
       'geolocation', 'notifications', 'camera', 'microphone', 'media',
       'midiSysex', 'background-sync', 'persistent-storage', 'idle-detection'
     ]);
+    // Swift Meet needs local camera/mic access; websites do not get it by default.
+    const isSwiftApp = String(webContents.getURL() || '').startsWith('swift://');
+    if (isSwiftApp && (permission === 'camera' || permission === 'microphone')) {
+      return callback(true);
+    }
     callback(!blocked.has(permission));
   });
 

@@ -860,6 +860,7 @@ $('#app-body').addEventListener('click', async (event) => {
 
 window.swiftApps.on('swift:auth-changed', async (next) => {
   state.auth = next;
+  if (!next.signedIn) state.data = null;
   if (APP_ID !== 'id' && APP_ID !== 'mail') {
     if (next.signedIn && !state.data) await loadData();
     else render();
