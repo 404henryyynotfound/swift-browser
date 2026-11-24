@@ -160,7 +160,7 @@ function appProtocolHandler(request, callback) {
       mimeType: MIME_TYPES['.html'],
       data: Buffer.from(template
         .replace('__APP_ID__', appId)
-        .replace('__EDITION_LABEL__', edition.badge || edition.channel))
+        .replace('__EDITION_LABEL__', edition.badge || (edition.id === 'stable' ? '' : edition.channel)))
     });
   } catch (error) {
     callback({ statusCode: 400, data: Buffer.from(String(error.message || error)) });
