@@ -8,7 +8,8 @@ description: |
   signals, upgrades connections to HTTPS, skips heavy third-party media in
   Turbo mode, and sleeps idle tabs. A local Swift ID unlocks Chat, Meet, AI,
   Docs, Sheets, Decks, Notes, Calendar, Drive and Tasks directly in the
-  browser. All profile data stays on your device.
+  browser. All profile data stays on your device. The same codebase also
+  ships Lite, Enterprise, Beta, Nightly and Developer editions.
 icon: snap/local/desktop/icon.png
 grade: stable
 confinement: strict

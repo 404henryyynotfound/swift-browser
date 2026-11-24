@@ -20,6 +20,7 @@
       <li>Local-only history, bookmarks and settings with private tabs</li>
       <li>Swift ID, Chat, Meet, AI, Docs, Sheets, Decks, Notes, Calendar, Drive and Tasks</li>
       <li>Encrypted local Drive files and on-device AI search</li>
+      <li>Editions from one codebase: Lite, Enterprise, Beta, Nightly and Developer</li>
     </ul>
     <p>
       Swift Mail is coming soon: a custom domain is needed before @swift.email
@@ -28,8 +29,9 @@
   </description>
   <launchable type="desktop-id">com.swiftbrowser.Swift.desktop</launchable>
   <url type="homepage">https://swift-browser.surge.sh</url>
+  <url type="help">https://swift-tech.surge.sh</url>
   <url type="bugtracker">https://github.com/404henryyynotfound/swift-browser/issues</url>
-  <developer_name>Swift Browser</developer_name>
+  <developer_name>Swift Technologies</developer_name>
   <categories>
     <category>Network</category>
     <category>WebBrowser</category>
