@@ -1,0 +1,6 @@
+README.md
+.surgeignore
+.DS_Store
+node_modules/
+.git/
+*.log

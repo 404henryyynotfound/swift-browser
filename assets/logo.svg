@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 96" role="img" aria-labelledby="title">
+  <title id="title">Swift browser</title>
+  <defs>
+    <linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#6366f1"/></linearGradient>
+    <linearGradient id="b" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#c084fc"/></linearGradient>
+    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#f4f9ff"/><stop offset=".75" stop-color="#a5d8f5"/></linearGradient>
+  </defs>
+  <g transform="translate(0 8) scale(1.25)">
+    <rect width="64" height="64" rx="15" fill="#070b16"/>
+    <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="#25405f" stroke-opacity=".7"/>
+    <path d="M8 14 38 32 8 50l10-18z" fill="url(#a)"/>
+    <path d="M26 14 56 32 26 50l10-18z" fill="url(#b)"/>
+  </g>
+  <text x="100" y="66" font-family="Inter, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="58" font-weight="750" letter-spacing="-3" fill="url(#word)">Swift</text>
+  <circle cx="421" cy="17" r="5" fill="#34d399"/>
+</svg>

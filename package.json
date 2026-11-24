@@ -1,0 +1,26 @@
+{
+  "name": "swift-browser",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Swift — a fast, private desktop browser with tracker blocking, fingerprint defense and tab sleeping.",
+  "main": "main.js",
+  "author": {
+    "name": "Swift Browser",
+    "email": "support@swift-browser.surge.sh"
+  },
+  "homepage": "https://swift-browser.surge.sh",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging",
+    "dist:linux-arm64": "electron-builder --linux --arm64",
+    "dist:linux-x64": "electron-builder --linux --x64",
+    "dist:snap": "electron-builder --linux snap",
+    "test": "node privacy/test.js && node lib/swift-apps.test.js",
+    "check": "node --check main.js && node --check preload.js && node --check apps-preload.js && node --check ui-preload.js && node --check privacy/blocklist.js && node --check lib/store.js && node --check lib/swift-apps.js && node --check lib/swift-apps.test.js && node --check ui/app.js && node --check ui/apps/apps.js && node --check site/app.js && npm test"
+  },
+  "devDependencies": {
+    "electron": "28.3.3",
+    "electron-builder": "24.13.3"
+  }
+}

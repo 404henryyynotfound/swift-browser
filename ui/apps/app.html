@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Swift</title>
+  <link rel="stylesheet" href="ui/apps/apps.css">
+</head>
+<body data-app="__APP_ID__">
+  <div id="shell" hidden>
+    <header class="app-topbar">
+      <div class="app-identity">
+        <span id="app-glyph" class="app-glyph"></span>
+        <div>
+          <h1 id="app-title"></h1>
+          <p id="app-tagline"></p>
+        </div>
+      </div>
+      <div class="app-top-actions">
+        <span id="save-state" class="save-state"><i></i> Local &amp; private</span>
+        <button id="account-chip" class="account-chip" title="Open Swift ID"></button>
+      </div>
+    </header>
+    <main id="app-body" class="app-body"></main>
+  </div>
+  <div id="app-toast" class="app-toast" aria-live="polite"></div>
+  <script src="ui/apps/apps.js"></script>
+</body>
+</html>

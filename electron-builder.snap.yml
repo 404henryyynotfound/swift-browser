@@ -1,0 +1,45 @@
+appId: com.swiftbrowser.Swift
+productName: Swift
+executableName: swift-browser
+copyright: Copyright © 2026 Swift Browser
+directories:
+  output: dist
+  buildResources: assets
+files:
+  - main.js
+  - preload.js
+  - apps-preload.js
+  - ui-preload.js
+  - lib/**/*
+  - privacy/**/*
+  - ui/**/*
+  - assets/**/*
+  - package.json
+linux:
+  category: Network;WebBrowser;
+  maintainer: Swift Browser <support@swift-browser.surge.sh>
+  target:
+    - snap
+snap:
+  summary: Private browser with a local-first Swift app suite
+  description: |
+    Swift is a desktop browser focused on speed and privacy. It blocks known
+    third-party trackers from a bundled list, masks common fingerprinting
+    signals, upgrades connections to HTTPS, skips heavy third-party media in
+    Turbo mode, and sleeps idle tabs. A local Swift ID unlocks Chat, Meet, AI,
+    Docs, Sheets, Decks, Notes, Calendar, Drive and Tasks directly in the
+    browser. All profile data stays on your device.
+  grade: stable
+  confinement: strict
+  plugs:
+    - desktop
+    - desktop-legacy
+    - home
+    - removable-media
+    - network
+    - network-bind
+    - opengl
+    - wayland
+    - x11
+    - pulseaudio
+    - browser-support

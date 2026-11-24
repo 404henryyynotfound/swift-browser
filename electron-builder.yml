@@ -1,0 +1,31 @@
+appId: com.swiftbrowser.Swift
+productName: Swift
+executableName: swift-browser
+copyright: Copyright © 2026 Swift Browser
+directories:
+  output: dist
+  buildResources: assets
+files:
+  - main.js
+  - preload.js
+  - apps-preload.js
+  - ui-preload.js
+  - lib/**/*
+  - privacy/**/*
+  - ui/**/*
+  - assets/**/*
+  - package.json
+artifactName: swift-browser-${os}-${arch}.${ext}
+linux:
+  category: Network;WebBrowser;
+  maintainer: Swift Browser <support@swift-browser.surge.sh>
+  target:
+    - tar.gz
+mac:
+  target:
+    - dmg
+    - zip
+win:
+  target:
+    - nsis
+    - zip

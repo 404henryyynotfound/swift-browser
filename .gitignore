@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.snap
+*.flatpak
+site/.surge-cache/
+.DS_Store

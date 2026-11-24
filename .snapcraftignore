@@ -1,0 +1,5 @@
+node_modules/
+.git/
+site/README.md
+snap/local/wrappers/README.md
+*.log

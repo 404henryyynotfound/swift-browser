@@ -1,0 +1,97 @@
+name: swift-browser
+base: core22
+version: '1.0.0'
+summary: Private browser with a local-first Swift app suite
+description: |
+  Swift is a desktop browser focused on speed and privacy. It blocks known
+  third-party trackers from a bundled list, masks common fingerprinting
+  signals, upgrades connections to HTTPS, skips heavy third-party media in
+  Turbo mode, and sleeps idle tabs. A local Swift ID unlocks Chat, Meet, AI,
+  Docs, Sheets, Decks, Notes, Calendar, Drive and Tasks directly in the
+  browser. All profile data stays on your device.
+icon: snap/local/desktop/icon.png
+grade: stable
+confinement: strict
+architectures:
+  - build-on: amd64
+    build-for: amd64
+  - build-on: arm64
+    build-for: arm64
+
+apps:
+  swift-browser:
+    command: bin/swift-browser
+    desktop: usr/share/applications/swift-browser.desktop
+    plugs:
+      - desktop
+      - desktop-legacy
+      - home
+      - removable-media
+      - network
+      - network-bind
+      - opengl
+      - wayland
+      - x11
+      - pulseaudio
+      - browser-support
+
+parts:
+  browser:
+    plugin: nil
+    source: .
+    build-packages:
+      - curl
+      - ca-certificates
+    stage-packages:
+      - libgtk-3-0
+      - libnotify4
+      - libnss3
+      - libgbm1
+      - libasound2
+      - libxss1
+      - libxkbcommon0
+      - libxrandr2
+      - libxdamage1
+      - libxfixes3
+      - libxcomposite1
+      - libatk1.0-0
+      - libatk-bridge2.0-0
+      - libcups2
+      - libdrm2
+      - libpango-1.0-0
+      - libcairo2
+      - fonts-liberation
+    override-build: |
+      set -e
+      case "$CRAFT_TARGET_ARCH" in
+        amd64) asset_arch=x64 ;;
+        arm64) asset_arch=arm64 ;;
+        *) echo "Unsupported target architecture: $CRAFT_TARGET_ARCH" >&2; exit 1 ;;
+      esac
+      archive="dist/swift-browser-linux-${asset_arch}.tar.gz"
+      if [ ! -f "${CRAFT_PART_SRC}/${archive}" ]; then
+        echo "Missing ${archive}. Run: npm run dist:linux-${asset_arch%%64}64" >&2
+        exit 1
+      fi
+      mkdir -p "${CRAFT_PART_INSTALL}/opt/swift-browser"
+      tar -xzf "${CRAFT_PART_SRC}/${archive}" --strip-components=1 \
+        -C "${CRAFT_PART_INSTALL}/opt/swift-browser"
+      chmod +x "${CRAFT_PART_INSTALL}/opt/swift-browser/swift-browser"
+
+  wrappers:
+    plugin: nil
+    source: .
+    override-build: |
+      set -e
+      install -Dm755 "${CRAFT_PART_SRC}/snap/local/wrappers/swift-browser" \
+        "${CRAFT_PART_INSTALL}/bin/swift-browser"
+
+  desktop-file:
+    plugin: nil
+    source: .
+    override-build: |
+      set -e
+      install -Dm644 "${CRAFT_PART_SRC}/snap/local/desktop/swift-browser.desktop" \
+        "${CRAFT_PART_INSTALL}/usr/share/applications/swift-browser.desktop"
+      install -Dm644 "${CRAFT_PART_SRC}/snap/local/desktop/icon.png" \
+        "${CRAFT_PART_INSTALL}/meta/gui/icon.png"

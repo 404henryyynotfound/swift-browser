@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#070b16">
+  <meta name="description" content="Swift is a fast, privacy-first desktop browser for Linux with a local-first app suite and Swift ID. No telemetry, no cloud account, no waiting.">
+  <title>Swift — The browser that moves at your speed</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- One original mark, reused by the nav, hero, and footer. -->
+  <svg class="svg-sprite" aria-hidden="true" focusable="false" width="0" height="0">
+    <defs>
+      <linearGradient id="swift-grad-a" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#22d3ee"></stop>
+        <stop offset="1" stop-color="#6366f1"></stop>
+      </linearGradient>
+      <linearGradient id="swift-grad-b" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#6366f1"></stop>
+        <stop offset="1" stop-color="#a855f7"></stop>
+      </linearGradient>
+    </defs>
+    <symbol id="swift-mark" viewBox="0 0 64 64">
+      <path d="M8 14 38 32 8 50l10-18z" fill="url(#swift-grad-a)"></path>
+      <path d="M26 14 56 32 26 50l10-18z" fill="url(#swift-grad-b)"></path>
+    </symbol>
+  </svg>
+
+  <header class="site-header" id="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#hero" aria-label="Swift — back to top">
+        <span class="brand__mark"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#swift-mark"></use></svg></span>
+        <span class="brand__name">swift<span class="brand__dot">.</span></span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <a href="#privacy">Privacy</a>
+        <a href="#speed">Speed</a>
+        <a href="#apps">Apps</a>
+        <a href="#features">Features</a>
+        <a href="#download">Download</a>
+        <a class="nav-cta" href="#download">Get Swift <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__fallback"></div>
+        <canvas class="hero__canvas" id="hero-gl"></canvas>
+        <div class="hero__grid"></div>
+      </div>
+
+      <div class="container hero__layout">
+        <div class="hero__copy reveal">
+          <p class="eyebrow"><span class="eyebrow__pulse"></span> Privacy-first. Linux-native. Built to move.</p>
+          <h1 id="hero-title">The browser that moves<br><span class="text-gradient">at your speed.</span></h1>
+          <p class="hero__lede">Swift cuts the invisible weight out of browsing — trackers, fingerprinting scripts, telemetry, and tabs that quietly eat your battery. What's left is a browser that just goes.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="https://github.com/404henryyynotfound/swift-browser/releases/latest">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              Download for Linux
+            </a>
+            <a class="btn btn--ghost" href="#privacy">See what Swift blocks <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="hero__meta">No cloud account. No telemetry. No waiting around.</p>
+        </div>
+
+        <div class="hero__visual reveal" aria-hidden="true">
+          <div class="hero__halo"></div>
+          <div class="browser-window">
+            <div class="browser-window__bar">
+              <div class="window-dots"><i></i><i></i><i></i></div>
+              <div class="omnibox">
+                <svg viewBox="0 0 24 24" focusable="false"><path d="M7 10V8a5 5 0 0 1 10 0v2m-11 0h12v10H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path></svg>
+                <span>swift://newtab</span>
+              </div>
+              <span class="window-chip">turbo</span>
+            </div>
+            <div class="browser-window__body">
+              <div class="newtab">
+                <div class="newtab__mark"><svg viewBox="0 0 64 64" focusable="false"><use href="#swift-mark"></use></svg></div>
+                <p class="newtab__title">Ready when you are.</p>
+                <div class="newtab__search"><span>Search without being followed</span><kbd>⌘ K</kbd></div>
+                <div class="newtab__tiles">
+                  <span class="tile"></span><span class="tile"></span><span class="tile"></span><span class="tile"></span>
+                </div>
+              </div>
+              <div class="blocked-toast">
+                <span class="blocked-toast__icon">✓</span>
+                <span><strong>18 requests</strong> kept from phoning home <small>illustrative preview</small></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="hero__stats reveal">
+          <div class="stat">
+            <span class="stat__number" data-counter data-to="1284" data-duration="1700">0</span>
+            <span class="stat__label">trackers stopped</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number" data-counter data-to="23" data-duration="1400">0</span>
+            <span class="stat__label">requests trimmed</span>
+          </div>
+          <div class="stat">
+            <span class="stat__number" data-counter data-to="0">0</span>
+            <span class="stat__label">bytes of telemetry</span>
+          </div>
+          <p class="stats__note">Illustrative demo values — not benchmarks. They reset on every reload.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--privacy" id="privacy" aria-labelledby="privacy-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="kicker">01 / Privacy</p>
+          <h2 id="privacy-title">Privacy isn't a setting.<br><span class="text-muted">It's the default.</span></h2>
+          <p class="section__lede">You shouldn't have to tune a dozen switches to browse quietly. Swift ships with the safeguards on, and keeps them out of your way.</p>
+        </div>
+
+        <div class="privacy-grid">
+          <ul class="benefit-list reveal">
+            <li>
+              <span class="benefit-list__icon" aria-hidden="true">◎</span>
+              <div><h3>Trackers &amp; ads, stopped at the door</h3><p>Built-in filters block known trackers and intrusive ads before they load — no extension required.</p></div>
+            </li>
+            <li>
+              <span class="benefit-list__icon" aria-hidden="true">◈</span>
+              <div><h3>Fingerprint defense</h3><p>Swift reduces the signals a page can use to single you out, from canvas quirks to font enumeration.</p></div>
+            </li>
+            <li>
+              <span class="benefit-list__icon" aria-hidden="true">∅</span>
+              <div><h3>No telemetry, ever</h3><p>No usage pings, no crash uploads by default, no account tying your browsing to an identity.</p></div>
+            </li>
+            <li>
+              <span class="benefit-list__icon" aria-hidden="true">◐</span>
+              <div><h3>Private windows that stay private</h3><p>Session-only storage, isolated from your regular profile, closed the moment you are done.</p></div>
+            </li>
+          </ul>
+
+          <div class="block-panel reveal">
+            <div class="block-panel__head">
+              <span class="block-panel__title"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#swift-mark"></use></svg> What Swift blocks</span>
+              <span class="block-panel__live"><i></i> live demo</span>
+            </div>
+            <ul class="block-panel__rows">
+              <li><span>Third-party trackers</span><b>Blocked</b></li>
+              <li><span>Ad network scripts</span><b>Blocked</b></li>
+              <li><span>Fingerprinting probes</span><b>Reduced</b></li>
+              <li><span>Telemetry pings</span><b>None sent</b></li>
+            </ul>
+            <p class="block-panel__foot">Filters are illustrative here; real behavior depends on the sites you visit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--speed" id="speed" aria-labelledby="speed-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="kicker">02 / Speed</p>
+          <h2 id="speed-title">Less overhead.<br><span class="text-gradient">More momentum.</span></h2>
+          <p class="section__lede">Speed isn't only about rendering pixels faster. It's about doing less work in the background and starting instantly when you sit down.</p>
+        </div>
+
+        <div class="speed-cards">
+          <article class="speed-card reveal">
+            <span class="speed-card__index">01</span>
+            <div class="speed-card__art speed-card__art--sleep" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <h3>Tab sleeping</h3>
+            <p>Quiet tabs release memory and CPU after a delay, then wake up the moment you return to them.</p>
+          </article>
+          <article class="speed-card reveal">
+            <span class="speed-card__index">02</span>
+            <div class="speed-card__art speed-card__art--turbo" aria-hidden="true"><i></i><i></i><i></i></div>
+            <h3>Turbo mode</h3>
+            <p>One switch tightens resource budgets, defers heavy page work, and keeps the browser light on battery.</p>
+          </article>
+          <article class="speed-card reveal">
+            <span class="speed-card__index">03</span>
+            <div class="speed-card__art speed-card__art--instant" aria-hidden="true"><i></i><i></i></div>
+            <h3>Instant local new tab</h3>
+            <p>Your new tab page is rendered on-device, so opening it never depends on a remote server.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--apps" id="apps" aria-labelledby="apps-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="kicker">03 / Apps</p>
+          <h2 id="apps-title">A whole workspace,<br><span class="text-gradient">inside the browser.</span></h2>
+          <p class="section__lede">Swift ID signs you in locally, then opens twelve apps directly from the sidebar or new tab. No second passwords, no cloud sync, no server watching what you write.</p>
+        </div>
+        <div class="apps-grid">
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#22d3ee">⬟</span><h3>Swift ID</h3><p>One device-local sign-in for every Swift app, hashed with PBKDF2.</p></article>
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#818cf8">◈</span><h3>Swift Chat</h3><p>Topic threads with action items you can pull straight into Tasks.</p></article>
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#f472b6">◎</span><h3>Swift Meet</h3><p>Browser-native rooms with local AI summaries and action items.</p></article>
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#a78bfa">✦</span><h3>Swift AI</h3><p>One local question across docs, notes, chats, calendar and tasks.</p></article>
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#60a5fa">▤</span><h3>Swift Docs</h3><p>Distraction-free blocks that export clean Markdown.</p></article>
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#34d399">▦</span><h3>Swift Sheets</h3><p>Formulas that stay correct when your data moves.</p></article>
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#fb7185">▥</span><h3>Swift Decks</h3><p>Turn a plain-text outline into a focused presentation.</p></article>
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#fbbf24">✎</span><h3>Swift Notes</h3><p>Quick notes, links and voice memos that stay on this device.</p></article>
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#38bdf8">▣</span><h3>Swift Calendar</h3><p>Events, focus blocks and a personal booking link.</p></article>
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#2dd4bf">⬡</span><h3>Swift Drive</h3><p>AES-256-GCM encrypted files with plain-English search.</p></article>
+          <article class="app-card reveal"><span class="app-card__glyph" style="--app-color:#4ade80">✓</span><h3>Swift Tasks</h3><p>Every promise made in chat, docs and meetings, in one list.</p></article>
+          <article class="app-card app-card--soon reveal"><span class="app-card__glyph" style="--app-color:#94a3b8">✉</span><h3>Swift Mail <small>coming soon</small></h3><p>Your @swift.email address is waiting on a custom domain. We will add it automatically when it launches.</p></article>
+        </div>
+        <p class="apps-note reveal">Swift Mail is coming soon. A custom domain is required before @swift.email addresses can exist — nothing to set up yet.</p>
+      </div>
+    </section>
+
+    <section class="section section--features" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="kicker">04 / Details</p>
+          <h2 id="features-title">The small things,<br><span class="text-muted">done properly.</span></h2>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card reveal"><span class="feature-card__icon" aria-hidden="true">↕</span><h3>Vertical tabs</h3><p>Optional, readable tabs that fit the way you actually work.</p></article>
+          <article class="feature-card reveal"><span class="feature-card__icon" aria-hidden="true">⌘</span><h3>Keyboard first</h3><p>Every action reachable without leaving the keyboard.</p></article>
+          <article class="feature-card reveal"><span class="feature-card__icon" aria-hidden="true">◫</span><h3>Split view</h3><p>Two pages side by side when you need to compare them.</p></article>
+          <article class="feature-card reveal"><span class="feature-card__icon" aria-hidden="true">✦</span><h3>On-device search</h3><p>Your new tab suggestions stay on your machine.</p></article>
+          <article class="feature-card reveal"><span class="feature-card__icon" aria-hidden="true">⇄</span><h3>Portable profiles</h3><p>Export your profile as plain files. Take it with you.</p></article>
+          <article class="feature-card reveal"><span class="feature-card__icon" aria-hidden="true">☾</span><h3>True dark mode</h3><p>A dark interface designed first, not inverted at the end.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--download" id="download" aria-labelledby="download-title">
+      <div class="container download-layout">
+        <div class="download-copy reveal">
+          <p class="kicker">05 / Get it</p>
+          <h2 id="download-title">Take Swift<br><span class="text-gradient">for a spin.</span></h2>
+          <p class="section__lede">Linux builds are available from the releases page. Pick your package manager and you're a couple of commands away.</p>
+          <a class="btn btn--primary" href="https://github.com/404henryyynotfound/swift-browser/releases/latest">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Download for Linux
+          </a>
+          <p class="download-copy__note">Linux first. macOS and Windows builds are on the roadmap.</p>
+        </div>
+
+        <div class="install-panel reveal">
+          <div class="install-step">
+            <div class="install-step__head"><span class="install-step__num">1</span><h3>Install with snap</h3></div>
+            <div class="code-block">
+              <code id="snap-command">sudo snap install swift-browser</code>
+              <button class="copy-button" type="button" data-copy-target="snap-command" aria-label="Copy snap install command"><span class="copy-button__label">Copy</span></button>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="install-step__head"><span class="install-step__num">2</span><h3>Or install with flatpak</h3></div>
+            <div class="code-block">
+              <code id="flatpak-command">flatpak install flathub com.swiftbrowser.Swift</code>
+              <button class="copy-button" type="button" data-copy-target="flatpak-command" aria-label="Copy flatpak install command"><span class="copy-button__label">Copy</span></button>
+            </div>
+          </div>
+          <p class="install-panel__note">Package names are placeholders for this concept site — check the releases page for the current install instructions.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="footer-brand">
+        <a class="brand" href="#hero" aria-label="Swift — back to top">
+          <span class="brand__mark"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#swift-mark"></use></svg></span>
+          <span class="brand__name">swift<span class="brand__dot">.</span></span>
+        </a>
+        <p>Fast, quiet, and yours.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#privacy">Privacy</a>
+        <a href="#speed">Speed</a>
+        <a href="#apps">Apps</a>
+        <a href="#features">Features</a>
+        <a href="#download">Download</a>
+      </nav>
+      <div class="footer-meta">
+        <p>Illustrative animations only. No performance claims.</p>
+        <p>© <span data-year>2026</span> Swift Browser.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Swift</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
+    <symbol id="i-reload" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6 1-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-1z"/></symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l4 2"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-max" viewBox="0 0 24 24"><path d="M5 5h14v14H5z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+    <symbol id="i-private" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-2.9 8.3-7 10-4.1-1.7-7-5.5-7-10V6z"/><circle cx="12" cy="11" r="2"/><path d="M12 13v4"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3m-9 0l1 14h10l1-14M10 11v6m4-6v6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-sleep" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-find" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M8 11h5"/></symbol>
+    <symbol id="swift-mark" viewBox="0 0 64 64">
+      <defs>
+        <linearGradient id="swift-a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#6366f1"/></linearGradient>
+        <linearGradient id="swift-b" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
+      </defs>
+      <rect width="64" height="64" rx="15" fill="#070b16"/>
+      <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="#25405f" stroke-opacity=".7"/>
+      <path d="M8 14 38 32 8 50l10-18z" fill="url(#swift-a)"/>
+      <path d="M26 14 56 32 26 50l10-18z" fill="url(#swift-b)"/>
+    </symbol>
+  </svg>
+
+  <div id="app">
+    <header id="chrome">
+      <div id="tabstrip" class="drag">
+        <button id="toggle-rail" class="brand no-drag" title="Show or hide the Swift apps sidebar" aria-label="Toggle Swift apps sidebar">
+          <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#swift-mark"/></svg>
+        </button>
+        <div id="tabs" class="no-drag" role="tablist" aria-label="Open tabs"></div>
+        <button id="add-tab" class="icon-btn no-drag" title="New tab (Ctrl+T)" aria-label="New tab"><svg><use href="#i-plus"/></svg></button>
+        <div class="drag-spacer"></div>
+        <div class="window-controls no-drag">
+          <button id="win-min" class="icon-btn" title="Minimize" aria-label="Minimize"><svg><use href="#i-minus"/></svg></button>
+          <button id="win-max" class="icon-btn" title="Maximize" aria-label="Maximize"><svg><use href="#i-max"/></svg></button>
+          <button id="win-close" class="icon-btn close" title="Close window" aria-label="Close window"><svg><use href="#i-close"/></svg></button>
+        </div>
+      </div>
+
+      <div id="toolbar" class="drag">
+        <div class="nav-group no-drag">
+          <button id="go-back" class="icon-btn" title="Back" aria-label="Back"><svg><use href="#i-left"/></svg></button>
+          <button id="go-forward" class="icon-btn" title="Forward" aria-label="Forward"><svg><use href="#i-right"/></svg></button>
+          <button id="reload" class="icon-btn" title="Reload (Ctrl+R)" aria-label="Reload"><svg><use href="#i-reload"/></svg></button>
+          <button id="go-home" class="icon-btn" title="New tab" aria-label="New tab"><svg><use href="#i-home"/></svg></button>
+        </div>
+
+        <form id="address-form" class="omnibox no-drag" autocomplete="off">
+          <button type="button" id="shield" class="shield" title="Privacy dashboard (Ctrl+P)" aria-label="Privacy dashboard">
+            <svg><use href="#i-shield"/></svg><span id="shield-count" hidden>0</span>
+          </button>
+          <svg class="omni-lock"><use href="#i-lock"/></svg>
+          <input id="address" type="text" spellcheck="false" placeholder="Search privately or enter an address" aria-label="Address and search bar">
+          <button type="button" id="bookmark-toggle" class="omni-action" title="Bookmark this page (Ctrl+D)" aria-label="Bookmark this page"><svg><use href="#i-star"/></svg></button>
+          <div id="suggestions" hidden></div>
+        </form>
+
+        <div class="tool-group no-drag">
+          <button id="open-find" class="icon-btn" title="Find in page (Ctrl+F)" aria-label="Find in page"><svg><use href="#i-find"/></svg></button>
+          <button id="open-privacy" class="icon-btn accent" title="Privacy dashboard (Ctrl+P)" aria-label="Privacy dashboard"><svg><use href="#i-shield"/></svg></button>
+          <button id="open-bookmarks" class="icon-btn" title="Bookmarks (Ctrl+D)" aria-label="Bookmarks"><svg><use href="#i-bookmark"/></svg></button>
+          <button id="open-history" class="icon-btn" title="History" aria-label="History"><svg><use href="#i-history"/></svg></button>
+          <button id="open-menu" class="icon-btn" title="Menu" aria-label="Menu"><svg><use href="#i-menu"/></svg></button>
+        </div>
+      </div>
+      <div id="loading-bar"><span></span></div>
+      <div id="findbar" hidden class="no-drag">
+        <svg><use href="#i-search"/></svg>
+        <input id="find-input" type="text" placeholder="Find in page" aria-label="Find in page">
+        <span id="find-count"></span>
+        <button id="find-prev" class="icon-btn" aria-label="Previous match">‹</button>
+        <button id="find-next" class="icon-btn" aria-label="Next match">›</button>
+        <button id="find-close" class="icon-btn" aria-label="Close find bar"><svg><use href="#i-close"/></svg></button>
+      </div>
+    </header>
+
+    <aside id="app-rail" class="no-drag" aria-label="Swift apps">
+      <div id="rail-apps"></div>
+      <button id="rail-account" class="rail-account" title="Swift ID" aria-label="Swift ID"><span class="rail-avatar">?</span></button>
+    </aside>
+
+    <main id="newtab" aria-label="New tab">
+      <div class="orb orb-one"></div><div class="orb orb-two"></div>
+      <div class="nt-inner">
+        <div class="nt-mark">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#swift-mark"/></svg>
+        </div>
+        <h1 class="nt-title">Swift</h1>
+        <p class="nt-tagline">Move fast. Leave nothing behind.</p>
+        <form id="nt-search" class="nt-search" autocomplete="off">
+          <svg><use href="#i-search"/></svg>
+          <input id="nt-input" type="text" placeholder="Search without being followed" aria-label="Search">
+          <button type="submit" aria-label="Search">→</button>
+        </form>
+        <div class="nt-apps-title">Your Swift apps</div>
+        <div class="nt-apps" id="nt-apps"></div>
+        <div class="nt-links" id="nt-links"></div>
+        <div class="nt-footer">
+          <div class="score-card">
+            <div id="score-ring" class="score-ring"><span id="score-value">0</span></div>
+            <div><strong>Privacy score</strong><span id="score-note">Strong defaults are on</span></div>
+          </div>
+          <div class="tip-card"><span id="tip-icon">✦</span><p id="tip-text">Swift blocks known trackers before they load — no remote lists, no phone-home.</p></div>
+          <div class="clock-card"><strong id="clock">--:--</strong><span id="date">Today</span></div>
+        </div>
+      </div>
+    </main>
+
+    <div id="overlay" hidden>
+      <div class="panel-backdrop"></div>
+      <section id="panel" role="dialog" aria-modal="true" aria-label="Swift panel"></section>
+    </div>
+    <div id="toast" aria-live="polite"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
