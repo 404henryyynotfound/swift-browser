@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Swift Nightly icon</title>
+  <defs>
+    <linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fb923c"/><stop offset="1" stop-color="#c2410c"/></linearGradient>
+    <linearGradient id="b" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#c2410c"/><stop offset="1" stop-color="#fed7aa"/></linearGradient>
+    <radialGradient id="bg" cx=".3" cy=".15" r=".95"><stop stop-color="#12203a"/><stop offset="1" stop-color="#070b16"/></radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="10" y="10" width="492" height="492" rx="104" fill="none" stroke="#2a4b6e" stroke-opacity=".75" stroke-width="6"/>
+  <path d="M46 108 306 256 46 404l80-148z" fill="url(#a)"/>
+  <path d="M206 108 466 256 206 404l80-148z" fill="url(#b)"/>
+  <path d="M126 256 306 256" stroke="#eaf6ff" stroke-opacity=".35" stroke-width="7" stroke-linecap="round"/>
+</svg>

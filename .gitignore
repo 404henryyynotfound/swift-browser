@@ -3,4 +3,9 @@ dist/
 *.snap
 *.flatpak
 site/.surge-cache/
+site/.surge/
+parts/
+prime/
+stage/
+overlay/
 .DS_Store

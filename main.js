@@ -9,7 +9,16 @@ const fs = require('fs');
 const crypto = require('crypto');
 const Store = require('./lib/store');
 const { APP_META, APP_IDS, createAppsBackend } = require('./lib/swift-apps');
+const { EDITIONS, detectEdition, visibleApps: visibleAppsForEdition } = require('./lib/editions');
 const { classify, hostOf, CATEGORY_LABELS } = require('./privacy/blocklist');
+
+const edition = detectEdition();
+if (edition.userDataSuffix) {
+  app.setPath('userData', path.join(app.getPath('userData'), edition.userDataSuffix));
+}
+if (edition.remoteDebugging && process.env.SWIFT_DEVTOOLS_PORT) {
+  app.commandLine.appendSwitch('remote-debugging-port', String(process.env.SWIFT_DEVTOOLS_PORT));
+}
 
 const CHROME_HEIGHT = 100;
 const NEW_TAB = 'swift://newtab';
@@ -48,8 +57,28 @@ protocol.registerSchemesAsPrivileged([{
   privileges: { standard: true, secure: true, supportFetchAPI: true, bypassCSP: false }
 }]);
 
+function readEnterprisePolicy() {
+  if (!edition.policies) return { organization: '', supportUrl: '', settings: {} };
+  const file = process.env.SWIFT_ENTERPRISE_POLICY || path.join(app.getPath('userData'), 'enterprise-policy.json');
+  try {
+    const parsed = JSON.parse(fs.readFileSync(file, 'utf8'));
+    return {
+      organization: String(parsed.organization || ''),
+      supportUrl: String(parsed.supportUrl || ''),
+      settings: parsed.settings && typeof parsed.settings === 'object' ? parsed.settings : {}
+    };
+  } catch {
+    return { organization: '', supportUrl: '', settings: {} };
+  }
+}
+
+const enterprisePolicy = readEnterprisePolicy();
 const store = new Store(path.join(app.getPath('userData'), 'swift-data.json'));
-const settings = Object.assign({}, DEFAULTS, store.get('settings', {}));
+const settings = Object.assign({}, DEFAULTS, edition.defaults, store.get('settings', {}), enterprisePolicy.settings);
+const lockedSettings = new Set([
+  ...(edition.lockedSettings || []),
+  ...Object.keys(enterprisePolicy.settings || {})
+]);
 const stats = Object.assign(
   { blocked: 0, saved: 0, byDomain: {}, byCategory: {} },
   store.get('stats', {})
@@ -57,7 +86,9 @@ const stats = Object.assign(
 const recentBlocks = [];
 const upgradeFailures = new Set();
 const tabs = new Map();
+const visibleApps = visibleAppsForEdition(APP_META, edition);
 const appsBackend = createAppsBackend(app.getPath('userData'), {
+  meta: visibleApps,
   notify: (channel, payload) => {
     send(channel, payload);
     for (const tab of tabs.values()) {
@@ -91,6 +122,21 @@ const MIME_TYPES = {
   '.svg': 'image/svg+xml', '.png': 'image/png', '.woff2': 'font/woff2'
 };
 
+function unavailableAppHtml(appId) {
+  const meta = APP_META.find((item) => item.id === appId) || { name: `Swift ${appId}` };
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>${meta.name} — ${edition.name}</title><style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#070b16;color:#e7f0ff;font:15px/1.6 system-ui,-apple-system,sans-serif}
+  main{max-width:520px;padding:36px;border:1px solid #1b2942;border-radius:18px;background:#0d1426}
+  .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:10px;letter-spacing:.14em;color:#070b16;font-weight:800;background:${edition.color}}
+  h1{font-size:26px;margin:16px 0 8px}a{color:${edition.color}}
+  </style></head><body><main><span class="badge">${edition.badge || edition.name}</span>
+  <h1>${meta.name} is not included in ${edition.name}.</h1>
+  <p>This edition keeps the browser lighter and focuses on a smaller set of tools. Switch to stable Swift for the full app suite.</p>
+  <p><a href="swift://id">Open Swift ID</a> · <a href="${edition.homepage}">Compare editions</a></p>
+  </main></body></html>`;
+}
+
 function appProtocolHandler(request, callback) {
   try {
     const parsed = new URL(request.url);
@@ -106,10 +152,15 @@ function appProtocolHandler(request, callback) {
       });
     }
     const appId = APP_IDS.includes(parsed.hostname) ? parsed.hostname : 'id';
+    if ((edition.disabledApps || []).includes(appId)) {
+      return callback({ mimeType: MIME_TYPES['.html'], data: Buffer.from(unavailableAppHtml(appId)) });
+    }
     const template = fs.readFileSync(path.join(__dirname, 'ui', 'apps', 'app.html'), 'utf8');
     return callback({
       mimeType: MIME_TYPES['.html'],
-      data: Buffer.from(template.replace('__APP_ID__', appId))
+      data: Buffer.from(template
+        .replace('__APP_ID__', appId)
+        .replace('__EDITION_LABEL__', edition.badge || edition.channel))
     });
   } catch (error) {
     callback({ statusCode: 400, data: Buffer.from(String(error.message || error)) });
@@ -598,8 +649,8 @@ function createWindow() {
     minHeight: 600,
     frame: false,
     backgroundColor: '#070b16',
-    icon: path.join(__dirname, 'assets', 'icon.png'),
-    title: 'Swift',
+    icon: path.join(__dirname, 'assets', edition.icon),
+    title: edition.name,
     webPreferences: {
       preload: path.join(__dirname, 'ui-preload.js'),
       contextIsolation: true,
@@ -657,14 +708,24 @@ function registerIpc() {
     tabs: tabList(),
     activeId: activeTabId,
     settings,
-    apps: APP_META,
+    apps: visibleApps,
     auth: authState(),
+    edition: {
+      ...edition,
+      version: `${app.getVersion()}-${edition.versionSuffix}`.replace(/-$/, ''),
+      lockedSettings: Array.from(lockedSettings),
+      policy: {
+        organization: enterprisePolicy.organization,
+        supportUrl: enterprisePolicy.supportUrl
+      }
+    },
     version: app.getVersion(),
     platform: process.platform
   }));
+  ipcMain.handle('swift:edition', () => edition);
   ipcMain.handle('swift:settings', () => settings);
   ipcMain.handle('swift:set-setting', (_event, key, value) => {
-    if (!(key in DEFAULTS)) return false;
+    if (!(key in DEFAULTS) || lockedSettings.has(key)) return false;
     settings[key] = value;
     store.set('settings', settings);
     broadcastSettings();

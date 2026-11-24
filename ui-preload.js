@@ -14,7 +14,7 @@ const CHANNELS = [
   'swift:minimize', 'swift:maximize', 'swift:close-window', 'swift:fullscreen',
   'swift:find', 'swift:find-stop', 'swift:zoom', 'swift:devtools', 'swift:new-private-window',
   'swift:export-data', 'swift:version', 'swift:focus-address', 'swift:frame', 'swift:sleep-tab',
-  'swift:panel', 'swift:auth-state'
+  'swift:panel', 'swift:auth-state', 'swift:edition'
 ];
 
 const EVENTS = [

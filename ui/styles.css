@@ -133,6 +133,20 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
   padding: 0 12px;
 }
 .nav-group, .tool-group { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; }
+.edition-badge {
+  margin-right: 6px; padding: 4px 8px;
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  color: var(--edition-color, var(--cyan));
+  background: color-mix(in srgb, var(--edition-color, var(--cyan)) 10%, transparent);
+  font-family: ui-monospace, Menlo, monospace; font-size: 9px; font-weight: 800;
+  letter-spacing: .1em; white-space: nowrap;
+}
+.edition-badge[hidden] { display: none; }
+body.edition-lite #app-rail { opacity: .86; }
+body.edition-nightly #newtab::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(135deg, rgba(251, 146, 60, .06), transparent 42%);
+}
 .omnibox {
   position: relative;
   flex: 1;
@@ -468,6 +482,7 @@ body.without-rail #newtab { margin-left: 0; }
 }
 .toggle.on { background: linear-gradient(90deg, var(--cyan), var(--indigo)); }
 .toggle.on::after { transform: translateX(18px); }
+.toggle:disabled { opacity: .55; cursor: not-allowed; }
 .select-field, .text-field {
   height: 34px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 9px;
   background: rgba(255, 255, 255, .05); outline: 0;

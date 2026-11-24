@@ -58,6 +58,13 @@ a { color: var(--cyan); }
 .app-identity h1 { margin: 0; font-size: 16px; letter-spacing: -.01em; }
 .app-identity p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
 .app-top-actions { display: flex; align-items: center; gap: 12px; }
+.app-edition {
+  padding: 4px 9px; border: 1px solid rgba(34, 211, 238, .28); border-radius: 999px;
+  background: rgba(34, 211, 238, .08); color: var(--cyan);
+  font-family: ui-monospace, Menlo, monospace; font-size: 9px; font-weight: 700; letter-spacing: .12em;
+  white-space: nowrap;
+}
+.app-edition:empty { display: none; }
 .save-state { display: flex; align-items: center; gap: 7px; color: var(--faint); font-size: 11px; white-space: nowrap; }
 .save-state i { width: 7px; height: 7px; border-radius: 50%; background: var(--good); box-shadow: 0 0 10px rgba(52, 211, 153, .8); }
 .save-state.busy i { background: var(--warn); box-shadow: 0 0 10px rgba(251, 191, 36, .8); }

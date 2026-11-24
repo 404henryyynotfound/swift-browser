@@ -51,6 +51,10 @@ Every app opens as a `swift://<app>` page from the sidebar rail, the new-tab gri
 
 Swift ID credentials never leave the device. The Drive key is derived at sign-in and exists only in memory, so Swift asks you to sign in again after a restart before encrypted files can be decrypted. Nothing is sent to an identity server, AI model or sync backend.
 
+## Editions
+
+Swift ships as five official channels from the same codebase: **Swift Lite** (low-resource), **Swift Enterprise** (policy-managed), **Swift Beta** (public preview), **Swift Nightly / Canary** (bleeding edge) and **Swift Developer** (automation and DevTools). Each has its own profile, icon, defaults and release artifacts. See [EDITIONS.md](EDITIONS.md) for selectors, policies and build commands.
+
 ## Run it
 
 ```bash
@@ -153,6 +157,7 @@ ui-preload.js           narrow bridge for the trusted chrome UI
 privacy/blocklist.js    bundled tracker list and classification
 lib/store.js            atomic local JSON store
 lib/swift-apps.js       Swift ID, app data, Drive encryption, AI search, IPC handlers
+lib/editions.js         edition registry, selectors and feature flags
 ui/                     browser chrome, new tab page, dashboards
 ui/apps/                shared shell and runtime for all twelve apps
 assets/                 logo and PNG icons

@@ -1,0 +1,6 @@
+extends: electron-builder.yml
+appId: com.swiftbrowser.SwiftBeta
+productName: Swift Beta
+executableName: swift-beta
+artifactName: swift-beta-${os}-${arch}.${ext}
+copyright: Copyright © 2026 Swift Technologies

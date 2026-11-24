@@ -1,0 +1,6 @@
+extends: electron-builder.yml
+appId: com.swiftbrowser.SwiftLite
+productName: Swift Lite
+executableName: swift-lite
+artifactName: swift-lite-${os}-${arch}.${ext}
+copyright: Copyright © 2026 Swift Technologies

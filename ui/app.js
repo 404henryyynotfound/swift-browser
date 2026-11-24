@@ -31,7 +31,7 @@ const state = {
   tabs: [], activeId: null, settings: {}, stats: null, version: '',
   bookmarks: [], history: [], panel: null, findVisible: false,
   suggestionIndex: -1, suggestions: [], tipIndex: 0,
-  apps: [], auth: null
+  apps: [], auth: null, edition: null
 };
 
 const activeTab = () => state.tabs.find((tab) => tab.id === state.activeId) || null;
@@ -164,7 +164,22 @@ function updateClock() {
   $('#date').textContent = now.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
 }
 
+function renderEdition() {
+  const edition = state.edition;
+  const badge = $('#edition-badge');
+  if (!edition || !badge) return;
+  document.title = edition.name;
+  document.body.dataset.edition = edition.id;
+  document.body.classList.toggle('edition-lite', edition.id === 'lite');
+  document.body.classList.toggle('edition-nightly', edition.id === 'nightly');
+  badge.textContent = edition.badge || edition.shortName;
+  badge.hidden = edition.id === 'stable';
+  badge.title = `${edition.channel} channel · ${edition.version}`;
+  badge.style.setProperty('--edition-color', edition.color || '#22d3ee');
+}
+
 function renderAll() {
+  renderEdition();
   renderTabs();
   renderRail();
   renderNewTabApps();
@@ -177,9 +192,10 @@ function renderAll() {
 /* ---------- panels ---------- */
 
 function toggleRow(key, title, description, checked) {
+  const locked = !!(state.edition && (state.edition.lockedSettings || []).includes(key));
   return `<div class="setting">
-    <div class="setting-info"><strong>${esc(title)}</strong><span>${esc(description)}</span></div>
-    <button class="toggle${checked ? ' on' : ''}" data-toggle="${key}" role="switch" aria-checked="${checked}" aria-label="${esc(title)}"></button>
+    <div class="setting-info"><strong>${esc(title)}</strong><span>${locked ? 'Managed by your organisation · ' : ''}${esc(description)}</span></div>
+    <button class="toggle${checked ? ' on' : ''}" data-toggle="${key}" role="switch" aria-checked="${checked}" aria-label="${esc(title)}"${locked ? ' disabled title="Managed by policy"' : ''}></button>
   </div>`;
 }
 
@@ -344,10 +360,11 @@ function panelAbout() {
       <button class="icon-btn" data-action="close" aria-label="Close"><svg><use href="#i-close"/></svg></button></div>
     <div class="panel-body"><div class="about-hero">
       <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#swift-mark"/></svg>
-      <h3>Swift ${esc(state.version)}</h3><p>Move fast. Leave nothing behind.</p>
+      <h3>${esc(state.edition ? state.edition.name : 'Swift')} ${esc(state.edition ? state.edition.version : state.version)}</h3><p>${esc(state.edition ? state.edition.channel : 'Stable')} channel · Move fast. Leave nothing behind.</p>
       <p style="margin-top:18px"><span class="badge">No telemetry</span> <span class="badge">Local data</span> <span class="badge">Open defaults</span></p>
     </div>
     <div class="panel-section"><h3>Take it with you</h3><div class="row">
+      <button class="btn" data-action="external" data-url="https://swift-tech.surge.sh"><svg><use href="#i-external"/></svg>Swift Technologies</button>
       <button class="btn" data-action="external" data-url="https://swift-browser.surge.sh"><svg><use href="#i-external"/></svg>Website</button>
       <button class="btn" data-action="external" data-url="https://github.com/404henryyynotfound/swift-browser"><svg><use href="#i-external"/></svg>Source</button>
     </div></div>
@@ -507,6 +524,7 @@ async function refreshData() {
   state.stats = privacy;
   state.apps = s.apps || [];
   state.auth = s.auth || null;
+  state.edition = s.edition || null;
   renderAll();
   if (state.panel) await refreshPanel();
 }

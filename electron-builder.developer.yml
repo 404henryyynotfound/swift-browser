@@ -1,0 +1,6 @@
+extends: electron-builder.yml
+appId: com.swiftbrowser.SwiftDeveloper
+productName: Swift Developer
+executableName: swift-developer
+artifactName: swift-developer-${os}-${arch}.${ext}
+copyright: Copyright © 2026 Swift Technologies

@@ -1,0 +1,6 @@
+extends: electron-builder.yml
+appId: com.swiftbrowser.SwiftNightly
+productName: Swift Nightly
+executableName: swift-nightly
+artifactName: swift-nightly-${os}-${arch}.${ext}
+copyright: Copyright © 2026 Swift Technologies
