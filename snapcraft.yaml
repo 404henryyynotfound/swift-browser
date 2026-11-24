@@ -1,7 +1,13 @@
 name: swift-browser
+title: Swift browser
 base: core22
 version: '1.0.0'
 summary: Private browser with a local-first Swift app suite
+license: MIT
+website: https://swift-browser.surge.sh
+source-code: https://github.com/404henryyynotfound/swift-browser
+issues: https://github.com/404henryyynotfound/swift-browser/issues
+contact: https://github.com/404henryyynotfound/swift-browser/issues
 description: |
   Swift is a desktop browser focused on speed and privacy. It blocks known
   third-party trackers from a bundled list, masks common fingerprinting
