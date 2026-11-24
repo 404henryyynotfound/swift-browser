@@ -1,6 +1,8 @@
-# Flatpak / Flathub files
+# Swift browser — Flathub packaging
 
-Copy the contents of this directory into a top-level `com.swiftbrowser.Swift/` directory in a fork of `github.com/flathub/flathub` and open a pull request.
+This directory contains the Flathub submission for Swift 1.0.0. The manifest
+downloads the official x86_64 and aarch64 release archives from the upstream
+GitHub release and verifies them with pinned SHA256 checksums.
 
 | File | Purpose |
 | --- | --- |
@@ -9,7 +11,13 @@ Copy the contents of this directory into a top-level `com.swiftbrowser.Swift/` d
 | `com.swiftbrowser.Swift.metainfo.xml` | AppStream metadata for Flathub and software centers |
 | `swift-browser-wrapper` | executable installed to `/app/bin/swift-browser` |
 | `icon-128.png`, `icon-256.png` | hicolor icons |
+| `screenshot-*.png` | screenshots referenced by the metainfo |
 
-Before submitting, replace the `SHA256_X64` and `SHA256_ARM64` placeholders in the manifest with real checksums from the GitHub release. See `../scripts/update-flatpak-sha.sh`.
+Upstream: https://github.com/404henryyynotfound/swift-browser
+Website: https://swift-browser.surge.sh
+Editions: https://swift-tech.surge.sh
+Release: https://github.com/404henryyynotfound/swift-browser/releases/tag/v1.0.0
 
-Flathub reviewers normally expect at least one screenshot referenced from the PR. Generate screenshots from a running Swift window and add them to the same directory, then reference them from the metainfo with `<screenshots>` if desired.
+When cutting a new release, update the URLs and `sha256` values in the manifest.
+`scripts/update-flatpak-sha.sh` in the upstream repository can fill them from
+`dist/swift-browser-linux-*.tar.gz`.
