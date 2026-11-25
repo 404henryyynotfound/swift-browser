@@ -1,0 +1,27 @@
+name: Build Snap (amd64)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch released x86_64 archive
+        run: |
+          mkdir -p dist
+          curl -fL --retry 3 \
+            -o dist/swift-browser-linux-x64.tar.gz \
+            https://github.com/404henryyynotfound/swift-browser/releases/download/v1.0.0/swift-browser-linux-x64.tar.gz
+
+      - name: Build snap
+        uses: snapcore/action-build@v1
+        id: snapcraft
+
+      - name: Upload snap artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: swift-browser-snap-amd64
+          path: ${{ steps.snapcraft.outputs.snap }}
